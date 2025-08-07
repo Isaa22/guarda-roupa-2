@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleWardrobe - Seu Guarda-Roupa Virtual</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-tshirt"></i>
+                <h1>StyleWardrobe</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#" class="active" id="home-btn">Meu Guarda-Roupa</a></li>
+                    <li><a href="#" id="looks-btn">Looks Recomendados</a></li>
+                    <li><a href="#" id="search-btn">Pesquisar Roupas</a></li>
+                </ul>
+            </nav>
+            <div class="user">
+                <i class="fas fa-user"></i>
+            </div>
+        </header>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <!-- Seção Meu Guarda-Roupa (Padrão) -->
+            <section id="wardrobe-section" class="content-section active">
+                <h2>Meu Guarda-Roupa</h2>
+                <div class="wardrobe-actions">
+                    <button id="create-look-btn">Criar Novo Look</button>
+                    <div class="search-wardrobe">
+                        <input type="text" placeholder="Buscar no guarda-roupa...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <div class="wardrobe-categories">
+                    <div class="category" id="tops">
+                        <h3>Blusas/Camisetas</h3>
+                        <div class="items-container"></div>
+                    </div>
+                    <div class="category" id="bottoms">
+                        <h3>Calças/Saias</h3>
+                        <div class="items-container"></div>
+                    </div>
+                    <div class="category" id="shoes">
+                        <h3>Tênis/Sapatos</h3>
+                        <div class="items-container"></div>
+                    </div>
+                    <div class="category" id="accessories">
+                        <h3>Acessórios</h3>
+                        <div class="items-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Looks Recomendados -->
+            <section id="looks-section" class="content-section">
+                <h2>Looks Recomendados</h2>
+                <div class="look-filters">
+                    <select id="occasion-filter">
+                        <option value="">Todas as Ocasiões</option>
+                        <option value="casual">Casual</option>
+                        <option value="work">Trabalho</option>
+                        <option value="party">Festa</option>
+                        <option value="date">Encontro</option>
+                    </select>
+                    <select id="season-filter">
+                        <option value="">Todas as Estações</option>
+                        <option value="summer">Verão</option>
+                        <option value="winter">Inverno</option>
+                        <option value="spring">Primavera</option>
+                        <option value="fall">Outono</option>
+                    </select>
+                </div>
+                
+                <div class="looks-grid" id="recommended-looks">
+                    <!-- Looks serão carregados via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Seção Pesquisar Roupas -->
+            <section id="search-section" class="content-section">
+                <h2>Pesquisar Roupas</h2>
+                <div class="search-bar">
+                    <input type="text" id="clothing-search" placeholder="Pesquise por 'calça jeans', 'vestido floral'...">
+                    <button id="search-clothing-btn"><i class="fas fa-search"></i> Pesquisar</button>
+                </div>
+                
+                <div class="store-tabs">
+                    <button class="store-tab active" data-store="shein">Shein</button>
+                    <button class="store-tab" data-store="zara">Zara</button>
+                    <button class="store-tab" data-store="hm">H&M</button>
+                </div>
+                
+                <div class="search-filters">
+                    <select id="category-filter">
+                        <option value="">Todas as Categorias</option>
+                        <option value="tops">Blusas/Camisetas</option>
+                        <option value="bottoms">Calças/Saias</option>
+                        <option value="dresses">Vestidos</option>
+                        <option value="shoes">Calçados</option>
+                        <option value="accessories">Acessórios</option>
+                    </select>
+                    <select id="color-filter">
+                        <option value="">Todas as Cores</option>
+                        <option value="black">Preto</option>
+                        <option value="white">Branco</option>
+                        <option value="blue">Azul</option>
+                        <option value="red">Vermelho</option>
+                        <option value="green">Verde</option>
+                    </select>
+                </div>
+                
+                <div class="search-results" id="clothing-results">
+                    <!-- Resultados da pesquisa serão carregados aqui -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal para adicionar roupa -->
+        <div class="modal" id="add-to-wardrobe-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Adicionar ao Guarda-Roupa</h3>
+                <div class="modal-item-preview">
+                    <img id="modal-item-img" src="" alt="Item">
+                    <div class="item-details">
+                        <h4 id="modal-item-name"></h4>
+                        <p id="modal-item-store"></p>
+                        <p id="modal-item-price"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="item-category">Categoria:</label>
+                    <select id="item-category">
+                        <option value="tops">Blusa/Camisa</option>
+                        <option value="bottoms">Calça/Saia</option>
+                        <option value="shoes">Calçado</option>
+                        <option value="accessories">Acessório</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="item-color">Cor:</label>
+                    <select id="item-color">
+                        <option value="black">Preto</option>
+                        <option value="white">Branco</option>
+                        <option value="blue">Azul</option>
+                        <option value="red">Vermelho</option>
+                        <option value="green">Verde</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="pink">Rosa</option>
+                        <option value="purple">Roxo</option>
+                        <option value="gray">Cinza</option>
+                        <option value="brown">Marrom</option>
+                        <option value="multicolor">Multicolor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="item-occasion">Ocasião:</label>
+                    <select id="item-occasion" multiple>
+                        <option value="casual">Casual</option>
+                        <option value="work">Trabalho</option>
+                        <option value="party">Festa</option>
+                        <option value="date">Encontro</option>
+                        <option value="sport">Esporte</option>
+                    </select>
+                </div>
+                <button id="confirm-add-item">Adicionar ao Guarda-Roupa</button>
+            </div>
+        </div>
+
+        <!-- Modal para criar look -->
+        <div class="modal" id="create-look-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Criar Novo Look</h3>
+                <div class="look-builder">
+                    <div class="look-preview">
+                        <div class="look-item" id="look-top">
+                            <span>Blusa/Camisa</span>
+                        </div>
+                        <div class="look-item" id="look-bottom">
+                            <span>Calça/Saia</span>
+                        </div>
+                        <div class="look-item" id="look-shoes">
+                            <span>Calçado</span>
+                        </div>
+                        <div class="look-item" id="look-accessory">
+                            <span>Acessório</span>
+                        </div>
+                    </div>
+                    <div class="look-options">
+                        <div class="form-group">
+                            <label for="look-name">Nome do Look:</label>
+                            <input type="text" id="look-name" placeholder="Ex: Look Casual para o Trabalho">
+                        </div>
+                        <div class="form-group">
+                            <label for="look-occasion">Ocasião:</label>
+                            <select id="look-occasion">
+                                <option value="casual">Casual</option>
+                                <option value="work">Trabalho</option>
+                                <option value="party">Festa</option>
+                                <option value="date">Encontro</option>
+                                <option value="sport">Esporte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="look-season">Estação:</label>
+                            <select id="look-season">
+                                <option value="summer">Verão</option>
+                                <option value="winter">Inverno</option>
+                                <option value="spring">Primavera</option>
+                                <option value="fall">Outono</option>
+                                <option value="all">Todas</option>
+                            </select>
+                        </div>
+                        <button id="save-look-btn">Salvar Look</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
